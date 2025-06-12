@@ -11,12 +11,9 @@ const Hero: React.FC = () => {
     document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const downloadCatalogue = () => {
-    // This will download your PDF catalogue from the public folder
-    const link = document.createElement('a');
-    link.href = '/catalogue.pdf';
-    link.download = 'Vader-R-Holdings-Catalogue.pdf';
-    link.click();
+  const viewCatalogue = () => {
+    // This will open your PDF catalogue in a new tab
+    window.open('/VADERR/catalogue.pdf', '_blank');
   };
 
   return (
@@ -55,11 +52,11 @@ const Hero: React.FC = () => {
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-6 justify-center animate-slide-up" style={{ animationDelay: '0.6s' }}>
           <button 
-            onClick={downloadCatalogue}
+            onClick={viewCatalogue}
             className="group bg-accent hover:bg-yellow-600 text-primary font-montserrat font-semibold px-10 py-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:-translate-y-2 hover:scale-105"
           >
             <Download size={22} />
-            Download Catalogue
+            View Catalogue
           </button>
           <button 
             onClick={scrollToContact}
