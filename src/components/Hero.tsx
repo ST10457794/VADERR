@@ -12,8 +12,11 @@ const Hero: React.FC = () => {
   };
 
   const downloadCatalogue = () => {
-    // This would link to your PDF catalogue
-    window.open('/catalogue.pdf', '_blank');
+    // This will download your PDF catalogue from the public folder
+    const link = document.createElement('a');
+    link.href = '/catalogue.pdf';
+    link.download = 'Vader-R-Holdings-Catalogue.pdf';
+    link.click();
   };
 
   return (
