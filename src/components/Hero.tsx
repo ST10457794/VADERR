@@ -12,8 +12,8 @@ const Hero: React.FC = () => {
   };
 
   const viewCatalogue = () => {
-    // This will open your PDF catalogue in a new tab
-    window.open('/VADERR/catalogue.pdf', '_blank');
+    // Updated path for custom domain
+    window.open('/catalogue.pdf', '_blank');
   };
 
   return (

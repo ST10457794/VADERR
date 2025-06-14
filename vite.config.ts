@@ -4,7 +4,7 @@ import react from '@vitejs/plugin-react';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/VADERR/', // 👈 Add this line
+  base: '/', // Changed from '/VADERR/' to '/' for custom domain
   optimizeDeps: {
     exclude: ['lucide-react'],
   },
