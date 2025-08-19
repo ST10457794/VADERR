@@ -29,7 +29,7 @@ const About: React.FC = () => {
           <div className="animate-slide-up">
             <div className="relative">
               <img 
-                src="https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop"
+                src="https://images.pexels.com/photos/10048979/pexels-photo-10048979.jpeg"
                 alt="Industrial Operations"
                 className="w-full h-96 object-cover rounded-2xl shadow-2xl"
               />

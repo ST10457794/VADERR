@@ -4,25 +4,25 @@ const Projects: React.FC = () => {
   const projectCategories = [
     {
       title: "Mining & Extraction",
-      image: "https://images.pexels.com/photos/1108572/pexels-photo-1108572.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/2101140/pexels-photo-2101140.jpeg",
       description: "Advanced mining equipment and extraction solutions for precious metals and minerals",
       projects: ["Chrome Mining Operations", "Manganese Extraction", "Gold Recovery Systems"]
     },
     {
       title: "Industrial Manufacturing",
-      image: "https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/33407055/pexels-photo-33407055.jpeg",
       description: "Comprehensive manufacturing support and equipment solutions",
       projects: ["Production Line Optimization", "Equipment Maintenance", "Process Automation"]
     },
     {
       title: "Engineering Solutions",
-      image: "https://images.pexels.com/photos/1108717/pexels-photo-1108717.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/224924/pexels-photo-224924.jpeg",
       description: "Custom engineering and fabrication services for complex industrial needs",
       projects: ["Steel Fabrication", "CNC Machining", "Electrical Systems"]
     },
     {
       title: "Plant Maintenance",
-      image: "https://images.pexels.com/photos/1108099/pexels-photo-1108099.jpeg?auto=compress&cs=tinysrgb&w=800&h=600&fit=crop",
+      image: "https://images.pexels.com/photos/14484347/pexels-photo-14484347.jpeg",
       description: "Comprehensive maintenance and repair services for industrial facilities",
       projects: ["Preventive Maintenance", "Emergency Repairs", "Equipment Upgrades"]
     }
