@@ -1,53 +1,70 @@
-import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Globe, Send, Clock, Award } from 'lucide-react';
-import { companyInfo } from '../data/company-data';
-import emailjs from 'emailjs-com';
+import React, { useState } from "react";
+import { MapPin, Phone, Mail, Globe, Send, Clock, Award } from "lucide-react";
+import { companyInfo } from "../data/company-data";
+import emailjs from "@emailjs/browser"; // ✅ updated SDK
 
 // Your EmailJS service details
-const SERVICE_ID = 'service_u2owwvg';
-const TEMPLATE_ID = 'template_vpocrer';
-const PUBLIC_KEY = 'oeLIocdAwU8dk0S4d';
+const SERVICE_ID = "service_u2owwvg";
+const TEMPLATE_ID = "template_f45iiav"; 
+const PUBLIC_KEY = "oeLIocdAwU8dk0S4d";
 
 const Contact: React.FC = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    company: '',
-    message: ''
+    name: "",
+    email: "",
+    company: "",
+    message: "",
   });
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const [loading, setLoading] = useState(false);
+
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setLoading(true);
 
     const templateParams = {
-      ...formData,
-      time: new Date().toLocaleString()
+      name: formData.name,
+      email: formData.email,
+      company: formData.company,
+      message: formData.message,
+      time: new Date().toLocaleString(),
     };
 
-    emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
-      .then((result) => {
-        console.log('Message sent:', result.text);
-        setFormData({ name: '', email: '', company: '', message: '' });
+    emailjs
+      .send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+      .then(() => {
+        alert("✅ Message sent successfully!");
+        setFormData({ name: "", email: "", company: "", message: "" });
       })
       .catch((error) => {
-        console.error('Failed to send message:', error);
-      });
+        alert("❌ Failed to send message. Please try again later.");
+        console.error("EmailJS error:", error);
+      })
+      .finally(() => setLoading(false));
   };
 
   return (
-    <section id="contact" className="py-24 bg-gradient-to-b from-neutral to-white relative overflow-hidden">
+    <section
+      id="contact"
+      className="py-24 bg-gradient-to-b from-neutral to-white relative overflow-hidden"
+    >
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A94B' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }}></div>
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23C9A94B' fill-opacity='0.1'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        ></div>
       </div>
 
       <div className="container mx-auto px-4 max-w-7xl relative z-10">
@@ -57,8 +74,9 @@ const Contact: React.FC = () => {
           </h2>
           <div className="w-24 h-1 bg-accent mx-auto mb-8"></div>
           <p className="font-lato text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
-            Ready to discuss your industrial needs? Our expert team is here to provide tailored solutions 
-            that drive your business forward. Let's build something extraordinary together.
+            Ready to discuss your industrial needs? Our expert team is here to
+            provide tailored solutions that drive your business forward. Let's
+            build something extraordinary together.
           </p>
         </div>
 
@@ -69,15 +87,19 @@ const Contact: React.FC = () => {
               <h3 className="font-montserrat font-bold text-3xl text-primary mb-8">
                 Contact Information
               </h3>
-              
+
               <div className="space-y-8">
                 <div className="flex items-start gap-6">
                   <div className="bg-gradient-to-br from-accent to-yellow-600 p-4 rounded-xl flex-shrink-0 shadow-lg">
                     <MapPin className="text-primary" size={24} />
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">Address</h4>
-                    <p className="font-lato text-gray-700 leading-relaxed">{companyInfo.contact.address}</p>
+                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">
+                      Address
+                    </h4>
+                    <p className="font-lato text-gray-700 leading-relaxed">
+                      {companyInfo.contact.address}
+                    </p>
                   </div>
                 </div>
 
@@ -86,8 +108,12 @@ const Contact: React.FC = () => {
                     <Phone className="text-primary" size={24} />
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">Phone</h4>
-                    <p className="font-lato text-gray-700 text-lg font-medium">{companyInfo.contact.phone}</p>
+                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">
+                      Phone
+                    </h4>
+                    <p className="font-lato text-gray-700 text-lg font-medium">
+                      {companyInfo.contact.phone}
+                    </p>
                   </div>
                 </div>
 
@@ -96,8 +122,12 @@ const Contact: React.FC = () => {
                     <Mail className="text-primary" size={24} />
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">Email</h4>
-                    <p className="font-lato text-gray-700 text-lg">{companyInfo.contact.email}</p>
+                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">
+                      Email
+                    </h4>
+                    <p className="font-lato text-gray-700 text-lg">
+                      {companyInfo.contact.email}
+                    </p>
                   </div>
                 </div>
 
@@ -106,8 +136,12 @@ const Contact: React.FC = () => {
                     <Globe className="text-primary" size={24} />
                   </div>
                   <div>
-                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">Website</h4>
-                    <p className="font-lato text-gray-700 text-lg">{companyInfo.contact.website}</p>
+                    <h4 className="font-montserrat font-semibold text-xl text-primary mb-2">
+                      Website
+                    </h4>
+                    <p className="font-lato text-gray-700 text-lg">
+                      {companyInfo.contact.website}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -118,15 +152,23 @@ const Contact: React.FC = () => {
                   <div className="flex items-center gap-3">
                     <Clock className="text-accent" size={20} />
                     <div>
-                      <p className="font-montserrat font-semibold text-primary">Business Hours</p>
-                      <p className="font-lato text-sm text-gray-600">Mon - Fri: 8:00 AM - 5:00 PM</p>
+                      <p className="font-montserrat font-semibold text-primary">
+                        Business Hours
+                      </p>
+                      <p className="font-lato text-sm text-gray-600">
+                        Mon - Fri: 8:00 AM - 5:00 PM
+                      </p>
                     </div>
                   </div>
                   <div className="flex items-center gap-3">
                     <Award className="text-accent" size={20} />
                     <div>
-                      <p className="font-montserrat font-semibold text-primary">Response Time</p>
-                      <p className="font-lato text-sm text-gray-600">Within 24 hours</p>
+                      <p className="font-montserrat font-semibold text-primary">
+                        Response Time
+                      </p>
+                      <p className="font-lato text-sm text-gray-600">
+                        Within 24 hours
+                      </p>
                     </div>
                   </div>
                 </div>
@@ -136,12 +178,19 @@ const Contact: React.FC = () => {
 
           {/* Contact Form */}
           <div className="animate-slide-up">
-            <form onSubmit={handleSubmit} className="bg-gradient-to-br from-primary to-gray-800 p-10 rounded-2xl shadow-xl text-white">
-              <h3 className="font-montserrat font-bold text-3xl text-accent mb-8">Send Us a Message</h3>
+            <form
+              onSubmit={handleSubmit}
+              className="bg-gradient-to-br from-primary to-gray-800 p-10 rounded-2xl shadow-xl text-white"
+            >
+              <h3 className="font-montserrat font-bold text-3xl text-accent mb-8">
+                Send Us a Message
+              </h3>
 
               <div className="grid md:grid-cols-2 gap-6 mb-6">
                 <div>
-                  <label className="block font-lato font-medium text-gray-300 mb-3">Name *</label>
+                  <label className="block font-lato font-medium text-gray-300 mb-3">
+                    Name *
+                  </label>
                   <input
                     type="text"
                     name="name"
@@ -153,7 +202,9 @@ const Contact: React.FC = () => {
                   />
                 </div>
                 <div>
-                  <label className="block font-lato font-medium text-gray-300 mb-3">Email *</label>
+                  <label className="block font-lato font-medium text-gray-300 mb-3">
+                    Email *
+                  </label>
                   <input
                     type="email"
                     name="email"
@@ -167,7 +218,9 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="mb-6">
-                <label className="block font-lato font-medium text-gray-300 mb-3">Company</label>
+                <label className="block font-lato font-medium text-gray-300 mb-3">
+                  Company
+                </label>
                 <input
                   type="text"
                   name="company"
@@ -179,7 +232,9 @@ const Contact: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                <label className="block font-lato font-medium text-gray-300 mb-3">Message *</label>
+                <label className="block font-lato font-medium text-gray-300 mb-3">
+                  Message *
+                </label>
                 <textarea
                   name="message"
                   value={formData.message}
@@ -193,10 +248,11 @@ const Contact: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full bg-accent hover:bg-yellow-600 text-primary font-montserrat font-bold px-8 py-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105"
+                disabled={loading}
+                className="w-full bg-accent hover:bg-yellow-600 text-primary font-montserrat font-bold px-8 py-4 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 shadow-xl hover:shadow-2xl transform hover:-translate-y-1 hover:scale-105 disabled:opacity-50"
               >
                 <Send size={22} />
-                Send Message
+                {loading ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>

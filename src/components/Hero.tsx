@@ -12,7 +12,7 @@ const Hero: React.FC = () => {
   };
 
   const viewCatalogue = () => {
-    // Updated path for custom domain
+    // ✅ Works in cPanel hosting (public_html root)
     window.open('/catalogue.pdf', '_blank');
   };
 
@@ -33,7 +33,7 @@ const Hero: React.FC = () => {
         {/* Logo */}
         <div className="mb-8 animate-fade-in">
           <img 
-            src="https://i.postimg.cc/MH9j29mM/Vader-R-Final.png" 
+            src="/assets/Vader-R-Final.png"   // ✅ Uses public_html/assets
             alt="Vader R Holdings Logo"
             className="w-48 md:w-64 lg:w-80 mx-auto drop-shadow-2xl transition-all duration-500 hover:scale-105"
           />
